@@ -6,40 +6,46 @@ export default function Task({ task, categories, onUpdate, onDelete, onAddSubtas
 
   return (
     <div className={`p-4 border rounded-lg dark:border-gray-700 ${categories[task.category].color}`}>
-      <div className="flex items-center gap-4">
-        <input
-          type="checkbox"
-          checked={task.completed}
-          onChange={(e) => onUpdate(task.id, { completed: e.target.checked })}
-          className="h-5 w-5"
-        />
-        <input
-          type="text"
-          value={task.title}
-          onChange={(e) => onUpdate(task.id, { title: e.target.value })}
-          className="flex-1 bg-transparent"
-        />
-        <select
-          value={task.category}
-          onChange={(e) => onUpdate(task.id, { category: e.target.value })}
-          className="p-1 rounded dark:bg-gray-800"
-        >
-          {Object.entries(categories).map(([key, { label }]) => (
-            <option key={key} value={key}>{label}</option>
-          ))}
-        </select>
-        <button
-          onClick={() => setShowSubtaskInput(!showSubtaskInput)}
-          className="p-2 hover:bg-white/20 rounded"
-        >
-          <FiPlus />
-        </button>
-        <button
-          onClick={() => onDelete(task.id)}
-          className="p-2 hover:bg-white/20 rounded text-red-500"
-        >
-          <FiTrash />
-        </button>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <input
+            type="checkbox"
+            checked={task.completed}
+            onChange={(e) => onUpdate(task.id, { completed: e.target.checked })}
+            className="h-5 w-5"
+          />
+          <input
+            type="text"
+            value={task.title}
+            onChange={(e) => onUpdate(task.id, { title: e.target.value })}
+            className="flex-1 bg-transparent min-w-0"
+          />
+        </div>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <select
+            value={task.category}
+            onChange={(e) => onUpdate(task.id, { category: e.target.value })}
+            className="p-1 rounded dark:bg-gray-800 text-sm w-full sm:w-auto"
+          >
+            {Object.entries(categories).map(([key, { label }]) => (
+              <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
+          <button
+            onClick={() => setShowSubtaskInput(!showSubtaskInput)}
+            className="p-2 hover:bg-white/20 rounded"
+            aria-label="Adicionar subtarefa"
+          >
+            <FiPlus />
+          </button>
+          <button
+            onClick={() => onDelete(task.id)}
+            className="p-2 hover:bg-white/20 rounded text-red-500"
+            aria-label="Excluir tarefa"
+          >
+            <FiTrash />
+          </button>
+        </div>
       </div>
 
       {showSubtaskInput && (
@@ -58,7 +64,7 @@ export default function Task({ task, categories, onUpdate, onDelete, onAddSubtas
           <input
             name="subtask"
             type="text"
-            placeholder="Add subtask..."
+            placeholder="Adicionar subtarefa..."
             className="w-full p-2 border rounded dark:bg-gray-800 dark:border-gray-700"
           />
         </form>

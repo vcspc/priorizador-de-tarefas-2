@@ -74,7 +74,7 @@ export default function TaskList() {
         <input
           name="task"
           type="text"
-          placeholder="Adicione uma nova tarefa..."
+          placeholder="Adicionar nova tarefa..."
           className="w-full p-2 border rounded dark:bg-gray-800 dark:border-gray-700"
         />
       </form>
